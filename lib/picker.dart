@@ -155,6 +155,7 @@ class Picker {
   }
 
   Widget? get widget => _widget;
+
   PickerWidgetState? get state => _state;
   int _maxLevel = 1;
 
@@ -208,7 +209,8 @@ class Picker {
       Color? backgroundColor,
       PickerWidgetBuilder? builder}) async {
     return await showModalBottomSheet<T>(
-        context: context, //state.context,
+        context: context,
+        //state.context,
         isScrollControlled: isScrollControlled,
         useRootNavigator: useRootNavigator,
         backgroundColor: backgroundColor,
@@ -217,11 +219,11 @@ class Picker {
           return builder == null ? picker : builder(context, picker);
         });
   }
-    
-  /// get widget
-  Widget getWidget(BuildContext context) {
-    return builder == null ? picker : builder(context, picker);
-  }
+
+  // /// get widget
+  // Widget getWidget(BuildContext context) {
+  //   return builder == null ? picker : builder(context, picker);
+  // }
 
   /// show dialog picker
   Future<List<int>?> showDialog(BuildContext context,
@@ -325,6 +327,7 @@ class Picker {
 class PickerDelimiter {
   final Widget? child;
   final int column;
+
   PickerDelimiter({required this.child, this.column = 1});
 }
 
@@ -344,8 +347,10 @@ class PickerItem<T> {
 
 class PickerWidget<T> extends InheritedWidget {
   final Picker data;
+
   const PickerWidget({Key? key, required this.data, required Widget child})
       : super(key: key, child: child);
+
   @override
   bool updateShouldNotify(covariant PickerWidget oldWidget) =>
       oldWidget.data != data;
@@ -360,6 +365,7 @@ class _PickerWidget<T> extends StatefulWidget {
   final Picker picker;
   final ThemeData? themeData;
   final bool isModal;
+
   _PickerWidget(
       {Key? key, required this.picker, this.themeData, required this.isModal})
       : super(key: key);
@@ -372,6 +378,7 @@ class _PickerWidget<T> extends StatefulWidget {
 class PickerWidgetState<T> extends State<_PickerWidget> {
   final Picker picker;
   final ThemeData? themeData;
+
   PickerWidgetState({required this.picker, this.themeData});
 
   ThemeData? theme;
@@ -715,9 +722,13 @@ abstract class PickerAdapter<T> {
   Picker? picker;
 
   int getLength();
+
   int getMaxLevel();
+
   void setColumn(int index);
+
   void initSelects();
+
   Widget buildItem(BuildContext context, int index);
 
   /// 是否需要更新前面的列
@@ -802,6 +813,7 @@ abstract class PickerAdapter<T> {
   }
 
   void doShow() {}
+
   void doSelect(int column, int index) {}
 
   int getColumnFlex(int column) {
